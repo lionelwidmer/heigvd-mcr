@@ -1,3 +1,5 @@
+package Brick;
+
 public abstract class BrickDecorator implements AbstractBrick {
 
     AbstractBrick brickDecorated;

@@ -1,6 +1,8 @@
-public class SideProtect extends BrickDecorator {
+package Brick;
 
-    SideProtect(AbstractBrick brick) {
+public class Shield extends BrickDecorator {
+
+    Shield(AbstractBrick brick) {
         super(brick);
     }
 

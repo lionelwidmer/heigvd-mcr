@@ -1,3 +1,5 @@
+package Brick;
+
 public interface AbstractBrick {
     int getSideProtected();
 

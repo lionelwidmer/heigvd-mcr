@@ -1,8 +1,6 @@
-public class Shield extends BrickDecorator {
+package Brick;
 
-    Shield(AbstractBrick brick) {
-        super(brick);
-    }
+public class Brick implements AbstractBrick {
 
     @Override
     public int getSideProtected() {

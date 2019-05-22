@@ -1,4 +1,10 @@
-public class Brick implements AbstractBrick {
+package Brick;
+
+public class SideProtect extends BrickDecorator {
+
+    SideProtect(AbstractBrick brick) {
+        super(brick);
+    }
 
     @Override
     public int getSideProtected() {
