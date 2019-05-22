@@ -1,4 +1,7 @@
-package Brick;
+package Brick.Decorator;
+
+import Brick.AbstractBrick;
+import Brick.BrickDecorator;
 
 public class SideProtect extends BrickDecorator {
 
