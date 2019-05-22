@@ -1,4 +1,6 @@
-package Brick;
+package ch.heig.breakout.Brick;
+
+import ch.heig.breakout.Bonus;
 
 public interface AbstractBrick {
     int getSideProtected();

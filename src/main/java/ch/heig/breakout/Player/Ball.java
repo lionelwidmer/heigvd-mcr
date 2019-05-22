@@ -1,4 +1,4 @@
-package Player;
+package ch.heig.breakout.Brick.Player;
 
 public class Ball {
     double posX;

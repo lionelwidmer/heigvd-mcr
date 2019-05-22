@@ -1,6 +1,6 @@
-import Player.PowerUp;
+package ch.heig.breakout;
 
-import java.util.ArrayList;
+import ch.heig.breakout.Brick.Player.PowerUp;
 
 public class Bonus {
     PowerUp pwu;

@@ -1,5 +1,8 @@
-import Brick.AbstractBrick;
-import Player.AbstractBar;
+package ch.heig.breakout;
+
+import ch.heig.breakout.Brick.AbstractBrick;
+import ch.heig.breakout.Brick.Player.AbstractBar;
+
 
 import javax.swing.*;
 import java.util.ArrayList;

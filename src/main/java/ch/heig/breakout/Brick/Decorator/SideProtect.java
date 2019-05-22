@@ -1,7 +1,8 @@
-package Brick.Decorator;
+package ch.heig.breakout.Brick.Decorator;
 
-import Brick.AbstractBrick;
-import Brick.BrickDecorator;
+import ch.heig.breakout.Brick.AbstractBrick;
+import ch.heig.breakout.Bonus;
+import ch.heig.breakout.Brick.BrickDecorator;
 
 public class SideProtect extends BrickDecorator {
 
@@ -9,17 +10,14 @@ public class SideProtect extends BrickDecorator {
         super(brick);
     }
 
-    @Override
     public int getSideProtected() {
         return 0;
     }
 
-    @Override
     public void draw() {
 
     }
 
-    @Override
     public Bonus destroy() {
         return null;
     }
