@@ -1,6 +1,6 @@
 package ch.heig.breakout;
 
-import ch.heig.breakout.Brick.Player.PowerUp;
+import ch.heig.breakout.Player.*;
 
 public class Bonus {
     PowerUp pwu;

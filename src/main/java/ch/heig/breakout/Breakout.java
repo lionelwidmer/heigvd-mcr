@@ -1,7 +1,7 @@
 package ch.heig.breakout;
 
 import ch.heig.breakout.Brick.AbstractBrick;
-import ch.heig.breakout.Brick.Player.AbstractBar;
+import ch.heig.breakout.Player.AbstractBar;
 
 
 import javax.swing.*;

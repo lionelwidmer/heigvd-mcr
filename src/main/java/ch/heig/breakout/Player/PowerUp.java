@@ -1,4 +1,4 @@
-package ch.heig.breakout.Brick.Player;
+package ch.heig.breakout.Player;
 
 public abstract class PowerUp extends AbstractBar {
     AbstractBar barDecorated;
