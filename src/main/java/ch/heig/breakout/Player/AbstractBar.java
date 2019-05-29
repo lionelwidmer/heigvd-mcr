@@ -1,18 +1,28 @@
 package ch.heig.breakout.Player;
 
+import java.awt.*;
+
 public abstract class AbstractBar {
 
-    double posY;
-    double posX;
+    protected final int HEIGHT = 20;
+    protected int posY;
+    protected int posX;
     Ball ball;
 
-    abstract int getLength();
+    protected AbstractBar(){}
 
-    abstract boolean shoot();
+    public AbstractBar(int x, int y){
+        this.posX = x;
+        this.posY = y;
+    }
 
-    abstract void draw();
+    public abstract int getLength();
 
-    abstract void move();
+    public abstract boolean shoot();
 
-    abstract boolean scotch();
+    public abstract void draw(Graphics g);
+
+    public abstract void move(int dist);
+
+    public abstract boolean scotch();
 }

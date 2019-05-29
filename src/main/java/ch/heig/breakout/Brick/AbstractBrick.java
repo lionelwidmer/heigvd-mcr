@@ -2,10 +2,32 @@ package ch.heig.breakout.Brick;
 
 import ch.heig.breakout.Bonus;
 
-public interface AbstractBrick {
-    int getSideProtected();
+import java.awt.*;
 
-    void draw();
+public abstract class AbstractBrick {
+    protected int posX;
+    protected int posY;
+    protected final static int WIDTH = 80;
+    protected final static int HEIGHT = 30;
 
-    Bonus destroy();
+    protected AbstractBrick(){}
+
+    public AbstractBrick(int x, int y){
+        this.posX = x;
+        this.posY = y;
+    }
+
+    public abstract int getSideProtected();
+
+    public abstract void draw(Graphics g);
+
+    public abstract Bonus destroy();
+
+    public static int getWIDTH(){
+        return WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
 }

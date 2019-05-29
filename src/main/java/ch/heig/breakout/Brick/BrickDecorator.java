@@ -1,11 +1,15 @@
 package ch.heig.breakout.Brick;
 
-public abstract class BrickDecorator implements AbstractBrick {
+public abstract class BrickDecorator extends AbstractBrick {
 
     AbstractBrick brickDecorated;
 
-   protected BrickDecorator(AbstractBrick brick) {
-        this.brickDecorated = brick;
+    public BrickDecorator(int x, int y) {
+        super(x, y);
+    }
 
+    public BrickDecorator(AbstractBrick brick) {
+        super();
+        this.brickDecorated = brick;
     }
 }
