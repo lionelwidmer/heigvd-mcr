@@ -9,14 +9,11 @@ public class Bar extends AbstractBar {
         super();
         posX = (x-getLength())/2;
         posY = y - MARGEIN;
+        ball = new Ball(posX, posY-20);
     }
 
     public int getLength() {
-        return 160;
-    }
-
-    public boolean shoot() {
-        return false;
+        return 140;
     }
 
     public void draw(Graphics g) {
@@ -24,11 +21,13 @@ public class Bar extends AbstractBar {
         g.fill3DRect(posX, posY, getLength(), HEIGHT, true);
     }
 
-    public void move(int dist) {
-        posX += dist;
+    public void move(int moveBar) {
+        posX += moveBar;
     }
 
     public boolean scotch() {
         return false;
     }
+
+
 }
