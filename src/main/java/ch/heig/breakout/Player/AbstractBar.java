@@ -18,11 +18,17 @@ public abstract class AbstractBar {
 
     public abstract int getLength();
 
-    public abstract boolean shoot();
-
     public abstract void draw(Graphics g);
 
-    public abstract void move(int dist);
+    public abstract void move(int moveBar);
 
     public abstract boolean scotch();
+
+    public Ball getBall(){
+        return ball;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
 }
