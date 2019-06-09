@@ -17,7 +17,6 @@ public class SideProtect extends BrickDecorator {
     }
 
     public void draw(Graphics g) {
-
     }
 
     public Bonus destroy() {

@@ -1,6 +1,8 @@
 package ch.heig.breakout.Brick;
 
 import ch.heig.breakout.Bonus;
+import ch.heig.breakout.Breakout;
+import ch.heig.breakout.Player.Ball;
 
 import java.awt.*;
 

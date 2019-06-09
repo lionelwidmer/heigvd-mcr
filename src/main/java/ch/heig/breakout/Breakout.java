@@ -2,6 +2,7 @@ package ch.heig.breakout;
 
 import ch.heig.breakout.Brick.AbstractBrick;
 import ch.heig.breakout.Brick.Brick;
+import ch.heig.breakout.Brick.Decorator.Shield;
 import ch.heig.breakout.Player.AbstractBar;
 import ch.heig.breakout.Player.Ball;
 import ch.heig.breakout.Player.Bar;
@@ -56,9 +57,13 @@ public class Breakout {
         window.setVisible(true);
         window.setResizable(false);
 
-        for(int i = 0; i < 8; ++i){
-            for(int j = 0; j < 10; ++j){
-                bricks.add(new Brick(MARGEIN+j*AbstractBrick.getWIDTH(), MARGEIN+i*AbstractBrick.getHEIGHT()));
+        final int nbrOfBrickRows = 8;
+        final int nbrOfBrickColumns = 10;
+        for(int i = 0; i < nbrOfBrickRows; ++i){
+            for(int j = 0; j < nbrOfBrickColumns; ++j){
+                Brick b = new Brick(MARGEIN+j*AbstractBrick.getWIDTH(), MARGEIN+i*AbstractBrick.getHEIGHT());
+                if(i == j || i == nbrOfBrickColumns - 1 - j) bricks.add(new Shield(b));
+                else bricks.add(b);
             }
         }
 
@@ -179,7 +184,11 @@ public class Breakout {
         bonuses.remove(bonus);
     }
 
-    public void removeBrick(Brick brick){
+    public void addBrick(AbstractBrick brick){
+        bricks.add(brick);
+    }
+
+    public void removeBrick(AbstractBrick brick){
         bricks.remove(brick);
     }
 

@@ -51,4 +51,12 @@ public class Ball {
     public void setVecY(int vecY) {
         this.vecY = vecY;
     }
+
+    public boolean intersectX(int x){
+        return posX + SIZE / 2 >= x && posX - SIZE / 2 <= x;
+    }
+
+    public boolean intersectY(int y){
+        return posY + SIZE / 2 >= y && posY - SIZE / 2 <= y;
+    }
 }
