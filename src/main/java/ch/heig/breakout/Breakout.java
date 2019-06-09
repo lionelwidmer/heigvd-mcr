@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class Breakout {
@@ -28,8 +28,8 @@ public class Breakout {
 
     private static Breakout instance;
 
-    private ArrayList<Bonus> bonuses;
-    private ArrayList<AbstractBrick> bricks = new ArrayList<AbstractBrick>();
+    private Collection<Bonus> bonuses = new HashSet<Bonus>();
+    private Collection<AbstractBrick> bricks = new HashSet<AbstractBrick>();
     private AbstractBar player = new Bar(PREF_WIDTH, PREF_HEIGHT);
 
     private class Panel extends JPanel {
@@ -169,6 +169,18 @@ public class Breakout {
         }
 
         return vectY;
+    }
+
+    public void addBonus(Bonus bonus){
+        bonuses.add(bonus);
+    }
+
+    public void removeBonus(Bonus bonus){
+        bonuses.remove(bonus);
+    }
+
+    public void removeBrick(Brick brick){
+        bricks.remove(brick);
     }
 
     public static void main(String... args){
