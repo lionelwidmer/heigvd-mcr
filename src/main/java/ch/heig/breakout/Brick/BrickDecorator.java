@@ -2,7 +2,7 @@ package ch.heig.breakout.Brick;
 
 public abstract class BrickDecorator extends AbstractBrick {
 
-    AbstractBrick brickDecorated;
+    protected AbstractBrick decoratedBrick;
 
     public BrickDecorator(int x, int y) {
         super(x, y);
@@ -10,6 +10,6 @@ public abstract class BrickDecorator extends AbstractBrick {
 
     public BrickDecorator(AbstractBrick brick) {
         super();
-        this.brickDecorated = brick;
+        this.decoratedBrick = brick;
     }
 }

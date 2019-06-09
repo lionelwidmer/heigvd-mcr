@@ -10,6 +10,14 @@ public abstract class AbstractBrick {
     protected final static int WIDTH = 80;
     protected final static int HEIGHT = 30;
 
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
     protected AbstractBrick(){}
 
     public AbstractBrick(int x, int y){
