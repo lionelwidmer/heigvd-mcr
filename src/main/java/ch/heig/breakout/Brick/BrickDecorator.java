@@ -11,7 +11,7 @@ public abstract class BrickDecorator extends AbstractBrick {
     }
 
     public BrickDecorator(AbstractBrick brick) {
-        super();
+        super(brick.board, brick.getPosX(), brick.getPosY());
         this.decoratedBrick = brick;
     }
 }

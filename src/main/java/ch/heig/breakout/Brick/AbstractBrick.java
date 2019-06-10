@@ -23,9 +23,6 @@ public abstract class AbstractBrick {
         return posY;
     }
 
-    protected AbstractBrick() {
-    }
-
     public AbstractBrick(Breakout board, int x, int y){
         this.posX = x;
         this.posY = y;
@@ -56,9 +53,7 @@ public abstract class AbstractBrick {
 
     public void manageCollision(Ball ball) {
         manageBouncing(ball);
-        //TODO getinstance() doesn't work
-        // -> maybe we could use board instead (reference attribute to the Breakout object we belong to)
-        // manageDamages();
+        manageDamages();
     }
 
     protected void manageBouncing(Ball ball) {

@@ -16,8 +16,8 @@ public class Shield extends BrickDecorator {
 
     @Override
     protected void manageDamages(){
-        Breakout.getInstance().removeBrick(this);
-        Breakout.getInstance().addBrick(decoratedBrick);
+        board.addBrick(decoratedBrick);
+        board.removeBrick(this);
     }
 
     public int getSideProtected() {
