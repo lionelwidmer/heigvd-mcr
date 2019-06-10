@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class Brick extends AbstractBrick {
 
-    public Brick(int x, int y){
-        super(x, y);
+    public Brick(Breakout board, int x, int y){
+        super(board, x, y);
     }
 
     public int getSideProtected() {

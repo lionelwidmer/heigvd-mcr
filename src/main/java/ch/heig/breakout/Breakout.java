@@ -61,7 +61,7 @@ public class Breakout {
         final int nbrOfBrickColumns = 10;
         for(int i = 0; i < nbrOfBrickRows; ++i){
             for(int j = 0; j < nbrOfBrickColumns; ++j){
-                Brick b = new Brick(MARGEIN+j*AbstractBrick.getWIDTH(), MARGEIN+i*AbstractBrick.getHEIGHT());
+                Brick b = new Brick(this, MARGEIN+j*AbstractBrick.getWIDTH(), MARGEIN+i*AbstractBrick.getHEIGHT());
                 if(i == j || i == nbrOfBrickColumns - 1 - j) bricks.add(new Shield(b));
                 else bricks.add(b);
             }
@@ -132,6 +132,16 @@ public class Breakout {
         } else {
             player.getBall().grip(moveBarX);
         }
+
+        //if we find a brick such that the brick consider itself intersecting the ball
+        //then we ask it to manage the collision
+        for(AbstractBrick b: bricks){
+            if(b.intersectBall(player.getBall())){
+                b.manageCollision(player.getBall());
+                break;
+            }
+        }
+
     }
 
     private void ballInBorder(Ball ball){

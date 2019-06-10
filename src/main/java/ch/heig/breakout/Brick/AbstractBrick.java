@@ -11,6 +11,7 @@ public abstract class AbstractBrick {
     protected int posY;
     protected final static int WIDTH = 80;
     protected final static int HEIGHT = 30;
+    protected Breakout board;
 
     public int getPosX() {
         return posX;
@@ -22,9 +23,31 @@ public abstract class AbstractBrick {
 
     protected AbstractBrick(){}
 
-    public AbstractBrick(int x, int y){
+    public AbstractBrick(Breakout board, int x, int y){
         this.posX = x;
         this.posY = y;
+        this.board = board;
+    }
+
+    public boolean intersectBall(Ball ball){
+        return (intersectLeftSide(ball) || intersectRightSide(ball)) &&
+                (intersectTopSide(ball) || intersectBottomSide(ball));
+    }
+
+    private boolean intersectLeftSide(Ball ball){
+        return ball.intersectX(posX);
+    }
+
+    private boolean intersectRightSide(Ball ball){
+        return ball.intersectX(posX + WIDTH);
+    }
+
+    private boolean intersectTopSide(Ball ball){
+        return ball.intersectY(posY);
+    }
+
+    private boolean intersectBottomSide(Ball ball){
+        return ball.intersectY(posY + HEIGHT);
     }
 
     public void manageCollision(Ball ball){
@@ -33,14 +56,14 @@ public abstract class AbstractBrick {
     }
 
     protected void manageBouncing(Ball ball) {
-        //if the ball touches the brick left or right side, make it bounce horizontally
-        if(ball.intersectX(posX) || ball.intersectX(posX + WIDTH)) ball.setVecX(- ball.getVecX());
         //if the ball touches the brick top or bottom side, make it bounce vertically
-        if(ball.intersectY(posY) || ball.intersectY(posY + HEIGHT)) ball.setVecY(- ball.getVecY());
+        if(intersectTopSide(ball) || intersectBottomSide(ball)) { ball.setVecY(- ball.getVecY()); return; }
+        //if the ball touches the brick left or right side, make it bounce horizontally
+        if(intersectLeftSide(ball) || intersectRightSide(ball)){ ball.setVecX(- ball.getVecX()); return; };
     }
 
     protected void manageDamages(){
-        Breakout.getInstance().removeBrick(this);
+        board.removeBrick(this);
         //TODO decide if bonus is released and release or not accordingly
     }
 

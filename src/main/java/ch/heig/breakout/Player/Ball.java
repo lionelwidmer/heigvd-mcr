@@ -53,10 +53,10 @@ public class Ball {
     }
 
     public boolean intersectX(int x){
-        return posX + SIZE / 2 >= x && posX - SIZE / 2 <= x;
+        return posX + SIZE >= x && posX - SIZE <= x;
     }
 
     public boolean intersectY(int y){
-        return posY + SIZE / 2 >= y && posY - SIZE / 2 <= y;
+        return posY + SIZE >= y && posY - SIZE <= y;
     }
 }
