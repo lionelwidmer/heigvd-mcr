@@ -189,43 +189,13 @@ public class Breakout {
         }
         //detect brick collision
         else {
-            Boolean collisionBrick = false;
-            for (AbstractBrick brick : bricks) {
-
+            for (AbstractBrick brick : bricks)
                 if (ball.getHitbox().intersects(brick.getHitbox())) {
-                    collisionBrick = true;
-                }
-                //ball is in the row of brick
-            /*if (ball.getPosY() < brick.getPosY() + AbstractBrick.getHEIGHT() / 2 &&
-                    ball.getPosY() > brick.getPosY() - AbstractBrick.getHEIGHT() / 2
-            ) {
-                //left of brick
-                if (ball.intersectX(brick.getPosX() + AbstractBrick.getWIDTH() / 2)) {
-                    collision = true;
-                    //right of brick
-                } else if (ball.intersectX(brick.getPosX() - AbstractBrick.getWIDTH() / 2)) {
-                    collision = true;
-                }
-            }
-            //ball is the column of brick
-            if (ball.getPosX() <= brick.getPosX() + AbstractBrick.getWIDTH() / 2 &&
-                    ball.getPosX() >= brick.getPosX() - AbstractBrick.getWIDTH() / 2
-            ) {
-                // top of brick
-                if (ball.intersectY(brick.getPosY() + AbstractBrick.getHEIGHT() / 2)) {
-                    collision = true;
-                }
-                //bottom of brick
-                else if (ball.intersectY(brick.getPosY() - AbstractBrick.getHEIGHT() / 2)) {
-                    collision = true;
-                }
-            }*/
-                if (collisionBrick) {
-                    brick.manageCollision(ball);
+                    brick.manageCollision(player.getBall());
                     break;
                 }
-            }
         }
+
     }
 
     public void addBonus(Bonus bonus) {

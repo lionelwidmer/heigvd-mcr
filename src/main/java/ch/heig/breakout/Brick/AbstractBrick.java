@@ -30,47 +30,15 @@ public abstract class AbstractBrick {
         hitbox = new Rectangle(posX, posY, WIDTH, HEIGHT);
     }
 
-    public boolean intersectBall(Ball ball){
-        return (intersectLeftSide(ball) || intersectRightSide(ball)) &&
-                (intersectTopSide(ball) || intersectBottomSide(ball));
-    }
-
-    private boolean intersectLeftSide(Ball ball){
-        return ball.intersectX(posX);
-    }
-
-    private boolean intersectRightSide(Ball ball){
-        return ball.intersectX(posX + WIDTH);
-    }
-
-    private boolean intersectTopSide(Ball ball){
-        return ball.intersectY(posY);
-    }
-
-    private boolean intersectBottomSide(Ball ball) {
-        return ball.intersectY(posY + HEIGHT);
-    }
-
     public void manageCollision(Ball ball) {
         manageBouncing(ball);
         manageDamages();
     }
 
     protected void manageBouncing(Ball ball) {
-
-/*        if (ball.getPosX() - Ball.SIZE / 2 <= posX || ball.getPosX() + Ball.SIZE / 2 >= posX + WIDTH) {
-            ball.setVecX(-ball.getVecX());
-        } else {
-            ball.setVecY(-ball.getVecY());
-       }*/
-        //if the ball touches the brick left or right side, make it bounce horizontally
-        if (intersectLeftSide(ball) || intersectRightSide(ball)) ball.setVecX(-ball.getVecX());
-            //if the ball touches the brick top or bottom side, make it bounce vertically
-        else {
-            ball.setVecY(-ball.getVecY());
-        }
-
-
+        Rectangle intersection = hitbox.intersection(ball.getHitbox());
+        if(intersection.width > intersection.height) ball.setVecX(-ball.getVecX());
+        else ball.setVecY(-ball.getVecY());
     }
 
     protected void manageDamages() {

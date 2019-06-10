@@ -55,13 +55,6 @@ public class Ball {
         this.vecY = vecY;
     }
 
-    public boolean intersectX(int x){
-        return posX + SIZE >= x && posX - SIZE <= x;
-    }
-
-    public boolean intersectY(int y) {
-        return posY + SIZE >= y && posY - SIZE <= y;
-    }
     public Rectangle getHitbox() {
         return hitbox;
     }
