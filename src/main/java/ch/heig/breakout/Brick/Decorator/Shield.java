@@ -4,6 +4,7 @@ import ch.heig.breakout.Bonus;
 import ch.heig.breakout.Breakout;
 import ch.heig.breakout.Brick.AbstractBrick;
 import ch.heig.breakout.Brick.BrickDecorator;
+import ch.heig.breakout.Player.Ball;
 import ch.heig.breakout.Ressources.Images;
 
 import java.awt.*;
@@ -15,7 +16,7 @@ public class Shield extends BrickDecorator {
     }
 
     @Override
-    protected void manageDamages(){
+    protected void manageDamages(Ball ball){
         board.addBrick(decoratedBrick);
         board.removeBrick(this);
     }

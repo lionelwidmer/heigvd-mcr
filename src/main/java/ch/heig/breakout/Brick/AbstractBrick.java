@@ -14,6 +14,8 @@ public abstract class AbstractBrick {
     protected final static int HEIGHT = 30;
     protected Breakout board;
 
+    protected enum Side {left, right, top, bottom, none};
+    protected Side lastTouchedSide = Side.none;
 
     public int getPosX() {
         return posX;
@@ -31,16 +33,49 @@ public abstract class AbstractBrick {
     }
 
     public void manageCollision(Ball ball) {
+        //Warning: don't call the following method at any point in code
+        updateLastTouchedSide(ball);
+        System.out.println("face touched: " + lastTouchedSide);
+
         manageBouncing(ball);
-        manageDamages();
+        manageDamages(ball);
     }
 
     protected void manageBouncing(Ball ball) {
+        /*
+        //if the ball horizontal speed is bigger than its vertical speed,
+        //then it means it touched the vertical borders of the brick first;
+        //so in this case we make it bounce horizontally
         if(Math.abs(ball.getVecY()) > Math.abs(ball.getVecX())) ball.setVecY(- ball.getVecY());
+        //otherwise, we make it bounce vertically
         else ball.setVecX(- ball.getVecX());
+        */
+
+        switch (lastTouchedSide){
+            case left: ball.setVecX(- ball.getVecX());
+            break;
+            case right: ball.setVecX((- ball.getVecX()));
+            break;
+            case top: ball.setVecY(- ball.getVecY());
+            break;
+            case bottom: ball.setVecY(- ball.getVecY());
+            break;
+            default:
+        }
+
     }
 
-    protected void manageDamages() {
+//Warning: don't call this method at any point in code (it makes assumptions that could be false sometimes)
+    private void updateLastTouchedSide(Ball ball){
+        Rectangle intersection = hitbox.intersection(ball.getHitbox());
+        Side leftRightCandidate = (intersection.x == posX) ? Side.left : Side.right;
+        Side topBottomCandidate = (intersection.y == posY) ? Side.top : Side.bottom;
+        if(intersection.width * Math.abs(ball.getVecY()) < ball.getVecX() * Math.abs(intersection.height))
+            lastTouchedSide = leftRightCandidate;
+        else lastTouchedSide = topBottomCandidate;
+    }
+
+    protected void manageDamages(Ball ball) {
         board.removeBrick(this);
         //TODO decide if bonus is released and release or not accordingly
     }
