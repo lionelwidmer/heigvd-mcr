@@ -33,4 +33,8 @@ public class Shield extends BrickDecorator {
     public Bonus destroy() {
         return null;
     }
+
+    public Rectangle getHitbox() {
+        return decoratedBrick.getHitbox();
+    }
 }

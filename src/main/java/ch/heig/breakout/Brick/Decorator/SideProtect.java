@@ -22,4 +22,8 @@ public class SideProtect extends BrickDecorator {
     public Bonus destroy() {
         return null;
     }
+
+    public Rectangle getHitbox() {
+        return decoratedBrick.getHitbox();
+    }
 }

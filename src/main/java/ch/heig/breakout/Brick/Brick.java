@@ -26,4 +26,8 @@ public class Brick extends AbstractBrick {
     public Bonus destroy() {
         return null;
     }
+
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
 }

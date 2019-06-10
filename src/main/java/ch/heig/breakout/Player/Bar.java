@@ -10,6 +10,7 @@ public class Bar extends AbstractBar {
         posX = (x-getLength())/2;
         posY = y - MARGEIN;
         ball = new Ball(posX, posY-20);
+        hitbox= new Rectangle(x,y,getLength(),HEIGHT);
     }
 
     public int getLength() {
@@ -23,6 +24,7 @@ public class Bar extends AbstractBar {
 
     public void move(int moveBar) {
         posX += moveBar;
+        hitbox.setLocation(posX,posY);
     }
 
     public boolean scotch() {
