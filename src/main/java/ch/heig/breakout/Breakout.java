@@ -38,7 +38,7 @@ public class Breakout {
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            for(AbstractBrick b : bricks){
+            for (AbstractBrick b : bricks) {
                 b.draw(g);
             }
             player.draw(g);
@@ -48,7 +48,7 @@ public class Breakout {
 
     private JPanel panel = new Panel();
 
-    private Breakout(){
+    private Breakout() {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(new Dimension(PREF_WIDTH, PREF_HEIGHT));
 
@@ -59,6 +59,7 @@ public class Breakout {
 
         final int nbrOfBrickRows = 8;
         final int nbrOfBrickColumns = 10;
+
         for(int i = 0; i < nbrOfBrickRows; ++i){
             for(int j = 0; j < nbrOfBrickColumns; ++j){
                 Brick b = new Brick(this, MARGEIN+j*AbstractBrick.getWIDTH(), MARGEIN+i*AbstractBrick.getHEIGHT());
@@ -70,7 +71,7 @@ public class Breakout {
         window.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent key) {
-                switch (key.getKeyCode()){
+                switch (key.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                         moveBar = -6;
                         break;
@@ -84,8 +85,8 @@ public class Breakout {
                 }
             }
 
-            public void keyReleased(KeyEvent key){
-                switch (key.getKeyCode()){
+            public void keyReleased(KeyEvent key) {
+                switch (key.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                     case KeyEvent.VK_RIGHT:
                         moveBar = 0;
@@ -96,15 +97,15 @@ public class Breakout {
         play();
     }
 
-    public static Breakout getInstance(){
-        if(instance == null) {
+    public static Breakout getInstance() {
+        if (instance == null) {
             instance = new Breakout();
         }
         return instance;
     }
 
-    void play(){
-        while(status == 0){
+    void play() {
+        while (status == 0) {
             try {
                 TimeUnit.MILLISECONDS.sleep(15);
             } catch (InterruptedException e) {
@@ -116,15 +117,16 @@ public class Breakout {
         instance = new Breakout();
     }
 
-    private void computeMove(){
+    private void computeMove() {
         int moveBarX = noCrossX(player.getPosX(), moveBar, player.getLength());
 
         //Bar
-        if(moveBar != 0)
+        if (moveBar != 0)
             player.move(moveBarX);
 
         //Ball
-        if(launch && !isGrip) {
+        if (launch && !isGrip) {
+            detectCollision();
             int moveX = noCrossX(player.getBall().getPosX(), player.getBall().getVecX(), Ball.SIZE);
             int moveY = noCrossY(player.getBall().getPosY(), player.getBall().getVecY(), Ball.SIZE);
             player.getBall().move(moveX, moveY);
@@ -133,77 +135,117 @@ public class Breakout {
             player.getBall().grip(moveBarX);
         }
 
-        //if we find a brick such that the brick consider itself intersecting the ball
-        //then we ask it to manage the collision
-        for(AbstractBrick b: bricks){
-            if(b.intersectBall(player.getBall())){
-                b.manageCollision(player.getBall());
-                break;
-            }
-        }
 
     }
 
-    private void ballInBorder(Ball ball){
-        if(ball.getPosX()+Ball.SIZE == PREF_WIDTH || ball.getPosX() == 0){
+    private void ballInBorder(Ball ball) {
+        if (ball.getPosX() + Ball.SIZE == PREF_WIDTH || ball.getPosX() == 0) {
             ball.setVecX(-ball.getVecX());
         }
 
-        if(ball.getPosY()+Ball.SIZE == PREF_HEIGHT){
+        if (ball.getPosY() + Ball.SIZE == PREF_HEIGHT) {
             status = -1;
         }
 
-        if(ball.getPosY() == 0){
+        if (ball.getPosY() == 0) {
             ball.setVecY(-ball.getVecY());
         }
     }
 
-    private int noCrossX(int posX, int vectX, int size){
-        int x = posX+size+vectX;
+    private int noCrossX(int posX, int vectX, int size) {
+        int x = posX + size + vectX;
 
-        if(x > PREF_WIDTH){
-            return PREF_WIDTH-posX-size;
+        if (x > PREF_WIDTH) {
+            return PREF_WIDTH - posX - size;
         }
 
-        if(x-size < 0){
+        if (x - size < 0) {
             return posX;
         }
 
         return vectX;
     }
 
-    private int noCrossY(int posY, int vectY, int size){
+    private int noCrossY(int posY, int vectY, int size) {
         int y = posY + vectY + size;
 
-        if(y > PREF_HEIGHT){
-            return PREF_HEIGHT-posY-size;
+        if (y > PREF_HEIGHT) {
+            return PREF_HEIGHT - posY - size;
         }
 
-        if(y-size < 0){
+        if (y - size < 0) {
             return posY;
         }
 
         return vectY;
     }
 
-    public void addBonus(Bonus bonus){
+    private void detectCollision() {
+        Ball ball = player.getBall();
+
+        //detect bar collision
+        if (ball.getHitbox().intersects(player.getHitbox())) {
+            player.manageCollision();
+        }
+        //detect brick collision
+        else {
+            Boolean collisionBrick = false;
+            for (AbstractBrick brick : bricks) {
+
+                if (ball.getHitbox().intersects(brick.getHitbox())) {
+                    collisionBrick = true;
+                }
+                //ball is in the row of brick
+            /*if (ball.getPosY() < brick.getPosY() + AbstractBrick.getHEIGHT() / 2 &&
+                    ball.getPosY() > brick.getPosY() - AbstractBrick.getHEIGHT() / 2
+            ) {
+                //left of brick
+                if (ball.intersectX(brick.getPosX() + AbstractBrick.getWIDTH() / 2)) {
+                    collision = true;
+                    //right of brick
+                } else if (ball.intersectX(brick.getPosX() - AbstractBrick.getWIDTH() / 2)) {
+                    collision = true;
+                }
+            }
+            //ball is the column of brick
+            if (ball.getPosX() <= brick.getPosX() + AbstractBrick.getWIDTH() / 2 &&
+                    ball.getPosX() >= brick.getPosX() - AbstractBrick.getWIDTH() / 2
+            ) {
+                // top of brick
+                if (ball.intersectY(brick.getPosY() + AbstractBrick.getHEIGHT() / 2)) {
+                    collision = true;
+                }
+                //bottom of brick
+                else if (ball.intersectY(brick.getPosY() - AbstractBrick.getHEIGHT() / 2)) {
+                    collision = true;
+                }
+            }*/
+                if (collisionBrick) {
+                    brick.manageCollision(ball);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void addBonus(Bonus bonus) {
         bonuses.add(bonus);
     }
 
-    public void removeBonus(Bonus bonus){
+    public void removeBonus(Bonus bonus) {
         bonuses.remove(bonus);
     }
 
-    public void addBrick(AbstractBrick brick){
+    public void addBrick(AbstractBrick brick) {
         bricks.add(brick);
     }
 
-    public void removeBrick(AbstractBrick brick){
+    public void removeBrick(AbstractBrick brick) {
         bricks.remove(brick);
     }
 
-    public static void main(String... args){
+    public static void main(String... args) {
 
-        Breakout breakout = getInstance();
+        getInstance();
     }
 }

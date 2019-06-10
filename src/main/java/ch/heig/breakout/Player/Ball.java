@@ -7,11 +7,13 @@ public class Ball {
     private int posY;
     private int vecX = 5;
     private int vecY = -10;
+    private Rectangle hitbox;
     public static final int SIZE = 20;
 
-    public Ball(int posX, int posY){
-        this.posX = posX+60;
+    public Ball(int posX, int posY) {
+        this.posX = posX + 60;
         this.posY = posY;
+        hitbox = new Rectangle(posX, posY, SIZE, SIZE);
     }
 
     public void draw(Graphics g) {
@@ -22,9 +24,10 @@ public class Ball {
     public void move(int moveX, int moveY) {
         posX += moveX;
         posY += moveY;
+        hitbox.setLocation(posX,posY);
     }
 
-    public void grip(int moveBall){
+    public void grip(int moveBall) {
         posX += moveBall;
     }
 
@@ -56,7 +59,11 @@ public class Ball {
         return posX + SIZE >= x && posX - SIZE <= x;
     }
 
-    public boolean intersectY(int y){
+    public boolean intersectY(int y) {
         return posY + SIZE >= y && posY - SIZE <= y;
     }
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+
 }
