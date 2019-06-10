@@ -36,9 +36,8 @@ public abstract class AbstractBrick {
     }
 
     protected void manageBouncing(Ball ball) {
-        Rectangle intersection = hitbox.intersection(ball.getHitbox());
-        if(intersection.width > intersection.height) ball.setVecX(-ball.getVecX());
-        else ball.setVecY(-ball.getVecY());
+        if(ball.getVecY() > ball.getVecX()) ball.setVecY(- ball.getVecY());
+        else ball.setVecX(- ball.getVecX());
     }
 
     protected void manageDamages() {
