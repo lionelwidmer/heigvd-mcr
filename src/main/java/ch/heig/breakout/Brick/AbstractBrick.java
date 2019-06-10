@@ -36,7 +36,7 @@ public abstract class AbstractBrick {
     }
 
     protected void manageBouncing(Ball ball) {
-        if(ball.getVecY() > ball.getVecX()) ball.setVecY(- ball.getVecY());
+        if(Math.abs(ball.getVecY()) > Math.abs(ball.getVecX())) ball.setVecY(- ball.getVecY());
         else ball.setVecX(- ball.getVecX());
     }
 
