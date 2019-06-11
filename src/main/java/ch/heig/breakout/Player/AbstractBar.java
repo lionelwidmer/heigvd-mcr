@@ -98,7 +98,7 @@ public abstract class AbstractBar {
     /**
      * @Brief   : tente de retirer un décorateur dont le nom de classe correspond au paramètre
      *           (ne peut pas retirer le tout premier décorateur)
-     * @param   : powerUpClassName String correspondant au getName() d'un PowerUp
+     * @param   : powerUpClassName, String correspondant au getName() d'un PowerUp
      * @return  : vrai s'il a réussi à retirer le décorateur, faux sinon
      */
     public boolean tryRemovePowerUp(String powerUpClassName) { return false;}
