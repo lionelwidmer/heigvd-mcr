@@ -7,10 +7,6 @@ public class scotch extends AbstractBar {
         return 0;
     }
 
-    public boolean shoot() {
-        return true;
-    }
-
     public void draw(Graphics g) {
         this.draw(g);
     }
@@ -20,6 +16,6 @@ public class scotch extends AbstractBar {
     }
 
     public boolean scotch() {
-        return false;
+        return true;
     }
 }
