@@ -43,6 +43,7 @@ public class Bonus {
      * @param g : Graphics où est dessiner le donus
      */
     public void draw(Graphics g) {
+        g.setColor(Color.red);
         g.drawOval(posX, posY, SIZE, SIZE);
     }
 

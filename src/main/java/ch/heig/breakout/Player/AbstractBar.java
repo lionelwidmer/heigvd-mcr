@@ -68,9 +68,9 @@ public abstract class AbstractBar {
 
     public void manageCollision() {
         int diff = ball.getPosX() - (posX+getLength()/2);
-            ball.setVecX((diff / 10) % 10);
+        ball.setVecX((diff / 10) % 10);
 
-            ball.setVecY(-ball.getVecY());
+        ball.setVecY(-ball.getVecY());
     }
 
     public int biggerCount() { return 0;}
