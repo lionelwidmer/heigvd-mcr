@@ -253,11 +253,15 @@ public class Breakout {
                 }
         }
 
-        //detect bonus collision with the bottom of board
+        //detect bonus collision with the bottom of board or bar
         Iterator<Bonus> it = bonuses.iterator();
         while(it.hasNext()){
             Bonus b = it.next();
-            if (b.getHitbox().y + b.getHitbox().height > PREF_HEIGHT - 140) it.remove();
+            if (b.getHitbox().intersects(player.getHitbox())){
+                it.remove();
+            } else if (b.getHitbox().y + b.getHitbox().height > PREF_HEIGHT) {
+                it.remove();
+            }
         }
 
 
