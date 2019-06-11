@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Breakout {
 
+    private final int FPS = 60;
     private final int MARGEIN = 40;
     private final int PREF_WIDTH = 885;
     private final int PREF_HEIGHT = 940;
@@ -115,7 +116,6 @@ public class Breakout {
 
     void play() {
 
-        final int fps = 60;
         long timestamp;
         long timeout = 0;
 
@@ -128,7 +128,7 @@ public class Breakout {
             }
             computeMove();
             window.repaint();
-            timeout = Math.max(0, timeout + (1000/fps) - (System.currentTimeMillis() - timestamp));
+            timeout = Math.max(0, timeout + (1000/FPS) - (System.currentTimeMillis() - timestamp));
         }
         instance = new Breakout();
     }
@@ -227,7 +227,7 @@ public class Breakout {
         while(it.hasNext()){
             //TODO modify this dummy implementation
             Bonus b = it.next();
-            if (b.getHitbox().y + b.getHitbox().height > PREF_HEIGHT - 56) it.remove();
+            if (b.getHitbox().y + b.getHitbox().height > PREF_HEIGHT - 140) it.remove();
         }
 
     }
