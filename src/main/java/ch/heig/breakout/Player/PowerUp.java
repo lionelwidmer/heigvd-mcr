@@ -38,7 +38,10 @@ public abstract class PowerUp extends AbstractBar {
     }
 
     public void manageCollision() {
-        barDecorated.manageCollision();
+        int diff = getBall().getPosX() - (getPosX()+getLength()/2);
+        getBall().setVecX(diff / 10);
+
+        getBall().setVecY(-getBall().getVecY());
     }
 
     public int biggerCount() { return barDecorated.biggerCount();}
