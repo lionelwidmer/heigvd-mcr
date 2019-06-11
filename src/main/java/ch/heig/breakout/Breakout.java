@@ -164,7 +164,7 @@ public class Breakout {
         }
 
         if (x - size < 0) {
-            return posX;
+            return - posX;
         }
 
         return vectX;
@@ -178,7 +178,7 @@ public class Breakout {
         }
 
         if (y - size < 0) {
-            return posY;
+            return - posY;
         }
 
         return vectY;
