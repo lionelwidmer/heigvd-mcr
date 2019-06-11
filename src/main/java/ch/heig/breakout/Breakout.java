@@ -32,6 +32,8 @@ public class Breakout {
 
     private JFrame window = new JFrame("Breakout");
 
+    JLabel textFin = new JLabel("");
+
     private static Breakout instance;
 
     private Collection<Bonus> bonuses = new HashSet<Bonus>();
@@ -65,9 +67,9 @@ public class Breakout {
     private Breakout() {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(new Dimension(PREF_WIDTH, PREF_HEIGHT));
-
+        panel.add(textFin);
         window.getContentPane().add(panel);
-
+        window.setLocationRelativeTo(null);
         window.setVisible(true);
         window.setResizable(false);
 
@@ -145,6 +147,14 @@ public class Breakout {
             computeMove();
             window.repaint();
             timeout = Math.max(0, timeout + (1000/FPS) - (System.currentTimeMillis() - timestamp));
+            if(bricks.isEmpty()){
+                status = 1;
+            }
+        }
+        if(status == -1) {
+            textFin.setText("Perdu !!");
+        } else {
+            textFin.setText("Gagnez !!");
         }
 
     }
