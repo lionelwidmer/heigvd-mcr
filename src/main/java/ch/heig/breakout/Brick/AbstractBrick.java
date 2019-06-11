@@ -100,8 +100,6 @@ public abstract class AbstractBrick {
                     lastTouchedSide = Side.right;
                 }
         }
-
-
     }
 
     protected void manageDamages(Ball ball) {
