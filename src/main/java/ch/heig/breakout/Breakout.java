@@ -16,7 +16,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +31,7 @@ public class Breakout {
     private int moveBar = 0;
     private boolean launch = false;
     private boolean isGrip = false;
+    private boolean isStart = true;
     private int status = 0;
 
     private JFrame window = new JFrame("Breakout");
@@ -105,7 +105,7 @@ public class Breakout {
                         break;
                     case KeyEvent.VK_SPACE:
                         launch = true;
-                        isGrip = player.scotch();
+                        isStart = false;
                         break;
                 }
             }
@@ -173,13 +173,14 @@ public class Breakout {
             player.move(moveBarX);
 
         //Ball
-        if (launch && !isGrip) {
-            detectCollision();
+        detectCollision();
+        if (launch && !isGrip && !isStart) {
             int moveX = noCrossX(player.getBall().getPosX(), player.getBall().getVecX(), Ball.SIZE);
             int moveY = noCrossY(player.getBall().getPosY(), player.getBall().getVecY(), Ball.SIZE);
             player.getBall().move(moveX, moveY);
             ballInBorder(player.getBall());
-        } else {
+        }
+        else if(isGrip || isStart){
             player.getBall().grip(moveBarX);
         }
 
@@ -253,9 +254,10 @@ public class Breakout {
     private void detectCollision() {
         Ball ball = player.getBall();
 
-
         //detect bar collision
         if (ball.getHitbox().intersects(player.getHitbox())) {
+            isGrip = player.scotch();
+            launch = false;
             player.manageCollision();
         } else {
             //detect brick collision
@@ -291,7 +293,7 @@ public class Breakout {
                         break;
                     case Bonus.SCOTCH:
                         if ( player.scotchCount() < 1)
-                        player = new Scotch(player);
+                            player = new Scotch(player);
                         break;
                     default:
                         break;
@@ -301,8 +303,6 @@ public class Breakout {
                 it.remove();
             }
         }
-
-
     }
 
     /**
@@ -339,7 +339,6 @@ public class Breakout {
 
 
     public static void main(String... args) {
-
         getInstance();
     }
 }
