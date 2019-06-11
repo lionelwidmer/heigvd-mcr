@@ -4,6 +4,8 @@ import ch.heig.breakout.Brick.AbstractBrick;
 import ch.heig.breakout.Bonus;
 import ch.heig.breakout.Brick.BrickDecorator;
 import ch.heig.breakout.Player.Ball;
+import ch.heig.breakout.Ressources.Images;
+import javafx.scene.paint.LinearGradient;
 
 import java.awt.*;
 
@@ -18,7 +20,10 @@ public class SideProtect extends BrickDecorator {
     }
 
     public void draw(Graphics g) {
-        decoratedBrick.draw(g);
+        Graphics2D g2 = (Graphics2D) g;
+        //g2.setPaint(Images.rays);
+        g2.setPaint(Color.GRAY);
+        g2.fill3DRect(posX, posY, WIDTH, HEIGHT, true);
     }
 
     public Bonus destroy() {

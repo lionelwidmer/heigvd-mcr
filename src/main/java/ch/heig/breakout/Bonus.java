@@ -29,6 +29,7 @@ public class Bonus {
      */
     public void move() {
         posY += DOWNWARDSPEED;
+        hitbox.translate(0, DOWNWARDSPEED);
     }
 
     /**
