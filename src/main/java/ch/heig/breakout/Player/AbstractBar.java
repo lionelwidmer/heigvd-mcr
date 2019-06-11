@@ -3,7 +3,7 @@ package ch.heig.breakout.Player;
 import java.awt.*;
 
 /**
- * @brief   :
+ * @brief   : Class Abstraite pour l'objet bar et ses décorateurs
  */
 public abstract class AbstractBar {
 
@@ -66,28 +66,31 @@ public abstract class AbstractBar {
         return new Rectangle(getPosX(), getPosY(), getLength(), HEIGHT);
     }
 
+    /**
+     * @brief   : Gère la colision de la balle et de la bar
+     */
     public void manageCollision() {
         int diff = ball.getPosX() - (posX+getLength()/2);
-            ball.setVecX((diff / 10) % 10);
+        ball.setVecX((diff / 10) % 10);
 
-            ball.setVecY(-ball.getVecY());
+        ball.setVecY(-ball.getVecY());
     }
 
     /**
      * @brief   : compte et retourne le nombre de décorateur Bigger
-     * @return  : int correspondant au nombre de décorateur Bigger
+     * @return  : int du nombre de décorateur Bigger
      */
     public int biggerCount() { return 0;}
 
     /**
      * @brief   : compte et retourne le nombre de décorateur Smaller
-     * @return  : int correspondant au nombre de décorateur Smaller
+     * @return  : int du nombre de décorateur Smaller
      */
     public int smallerCount() { return 0;}
 
     /**
      * @brief   : compte et retourne le nombre de décorateur Scotch
-     * @return  : int correspondant au nombre de décorateur Scotch
+     * @return  : int du nombre de décorateur Scotch
      */
     public int scotchCount() { return 0;}
 

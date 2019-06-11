@@ -2,6 +2,10 @@ package ch.heig.breakout.Brick;
 
 import ch.heig.breakout.Breakout;
 
+/**
+ * @brief   : Abstract class BrickDecorator héritant de AbstractBrick
+ * gérant les décorateur de brick
+ */
 public abstract class BrickDecorator extends AbstractBrick {
 
     protected AbstractBrick decoratedBrick;

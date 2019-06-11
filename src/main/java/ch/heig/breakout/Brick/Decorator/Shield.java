@@ -1,7 +1,6 @@
 package ch.heig.breakout.Brick.Decorator;
 
 import ch.heig.breakout.Bonus;
-import ch.heig.breakout.Breakout;
 import ch.heig.breakout.Brick.AbstractBrick;
 import ch.heig.breakout.Brick.BrickDecorator;
 import ch.heig.breakout.Player.Ball;
@@ -9,6 +8,10 @@ import ch.heig.breakout.Ressources.Images;
 
 import java.awt.*;
 
+/**
+ * @brief   : Décorateur de brick lui ajoutant un bouclier
+ * (doit être touché 2 fois)
+ */
 public class Shield extends BrickDecorator {
 
     public Shield(AbstractBrick brick) {

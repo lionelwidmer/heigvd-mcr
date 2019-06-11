@@ -158,9 +158,8 @@ public class Breakout {
         if(status == -1) {
             textFin.setText("Perdu !!");
         } else {
-            textFin.setText("Gagnez !!");
+            textFin.setText("Gagné !!");
         }
-
     }
 
     /**

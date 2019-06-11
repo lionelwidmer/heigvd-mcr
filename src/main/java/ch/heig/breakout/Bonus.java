@@ -1,8 +1,5 @@
 package ch.heig.breakout;
 
-import ch.heig.breakout.Player.*;
-import ch.heig.breakout.Player.Decorator.*;
-
 import java.awt.*;
 
 /**
@@ -43,6 +40,7 @@ public class Bonus {
      * @param g : Graphics où est dessiner le donus
      */
     public void draw(Graphics g) {
+        g.setColor(Color.red);
         g.drawOval(posX, posY, SIZE, SIZE);
     }
 

@@ -1,7 +1,9 @@
 package ch.heig.breakout.Player;
 
-import java.awt.*;
-
+/**
+ * @brief   : Abstract classe powerUP héritant de AbstractBar pour gérer les
+ * décorateurs de la bar
+ */
 public abstract class PowerUp extends AbstractBar {
 
     protected AbstractBar barDecorated;

@@ -3,8 +3,9 @@ package ch.heig.breakout.Player.Decorator;
 import ch.heig.breakout.Player.AbstractBar;
 import ch.heig.breakout.Player.PowerUp;
 
-import java.awt.*;
-
+/**
+ * @brief   : Décorateur smaller de AbstractBrick rend plus petit la bar
+ */
 public class Smaller extends PowerUp {
 
     public Smaller(AbstractBar bar) {
