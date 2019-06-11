@@ -35,7 +35,6 @@ public abstract class AbstractBrick {
     public void manageCollision(Ball ball) {
         //Warning: don't call the following method at any point in code
         updateLastTouchedSide(ball);
-        System.out.println("face touched: " + lastTouchedSide);
 
         manageBouncing(ball);
         manageDamages(ball);
@@ -51,9 +50,6 @@ public abstract class AbstractBrick {
         else ball.setVecX(- ball.getVecX());
         */
 
-        System.out.println("Ball speed before " + ball.getVecX() + ", " +
-                ball.getVecY());
-
         switch (lastTouchedSide){
             case left: ball.setVecX(- ball.getVecX());
             break;
@@ -66,8 +62,6 @@ public abstract class AbstractBrick {
             default:
         }
 
-        System.out.println("Ball speed after " + ball.getVecX() + ", " +
-                ball.getVecY() + "\n");
 
     }
 

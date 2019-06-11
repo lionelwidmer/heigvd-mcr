@@ -93,10 +93,10 @@ public class Breakout {
 
             public void keyReleased(KeyEvent key) {
                 switch (key.getKeyCode()) {
-                    case KeyEvent.VK_LEFT:
-                    case KeyEvent.VK_RIGHT:
-                        moveBar = 0;
-                        break;
+                    case KeyEvent.VK_LEFT: if(moveBar < 0) moveBar = 0;
+                    break;
+                    case KeyEvent.VK_RIGHT: if(moveBar > 0) moveBar = 0;
+                    break;
                 }
             }
         });
@@ -111,14 +111,21 @@ public class Breakout {
     }
 
     void play() {
+
+        final int fps = 60;
+        long timestamp;
+        long timeout = 0;
+
         while (status == 0) {
+            timestamp = System.currentTimeMillis();
             try {
-                TimeUnit.MILLISECONDS.sleep(15);
+                TimeUnit.MILLISECONDS.sleep(timeout);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             computeMove();
             window.repaint();
+            timeout = Math.max(0, timeout + (1000/fps) - (System.currentTimeMillis() - timestamp));
         }
         instance = new Breakout();
     }
