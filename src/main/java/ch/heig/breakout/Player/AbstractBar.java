@@ -2,6 +2,9 @@ package ch.heig.breakout.Player;
 
 import java.awt.*;
 
+/**
+ * @brief   :
+ */
 public abstract class AbstractBar {
 
     protected final int HEIGHT = 20;

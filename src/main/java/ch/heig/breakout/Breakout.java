@@ -16,6 +16,9 @@ import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @brief : Génère la fenètre du breakout et des tous les éléments contenue dedans
+ */
 public class Breakout {
 
     private final int MARGEIN = 40;
@@ -34,6 +37,9 @@ public class Breakout {
     private Collection<AbstractBrick> bricks = new HashSet<AbstractBrick>();
     private AbstractBar player = new Bar(PREF_WIDTH, PREF_HEIGHT);
 
+    /**
+     * @brief : Classe peremetant de dessiners les éléments dans la fenêtre
+     */
     private class Panel extends JPanel {
 
         @Override
@@ -42,9 +48,11 @@ public class Breakout {
             for (AbstractBrick b : bricks) {
                 b.draw(g);
             }
+
             for(Bonus b: bonuses){
                 b.draw(g);
             }
+
             player.draw(g);
             player.getBall().draw(g);
         }
@@ -52,6 +60,7 @@ public class Breakout {
 
     private JPanel panel = new Panel();
 
+    //Constructeur
     private Breakout() {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(new Dimension(PREF_WIDTH, PREF_HEIGHT));
@@ -82,10 +91,10 @@ public class Breakout {
             public void keyPressed(KeyEvent key) {
                 switch (key.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
-                        moveBar = -6;
+                        moveBar = -8;
                         break;
                     case KeyEvent.VK_RIGHT:
-                        moveBar = 6;
+                        moveBar = 8;
                         break;
                     case KeyEvent.VK_SPACE:
                         launch = true;
@@ -106,6 +115,10 @@ public class Breakout {
         play();
     }
 
+    /**
+     * @brief   : Récupère l'instance de breakout
+     * @return  : Breakout actuelle
+     */
     public static Breakout getInstance() {
         if (instance == null) {
             instance = new Breakout();
@@ -113,6 +126,9 @@ public class Breakout {
         return instance;
     }
 
+    /**
+     * @brief : Faut tourner le jeux et appel le repaint
+     */
     void play() {
 
         final int fps = 60;
@@ -130,9 +146,12 @@ public class Breakout {
             window.repaint();
             timeout = Math.max(0, timeout + (1000/fps) - (System.currentTimeMillis() - timestamp));
         }
-        instance = new Breakout();
+
     }
 
+    /**
+     * @brief   : Calcule les mouvements de la bar, de la balle et des bonus
+     */
     private void computeMove() {
         int moveBarX = noCrossX(player.getPosX(), moveBar, player.getLength());
 
@@ -156,6 +175,11 @@ public class Breakout {
 
     }
 
+    /**
+     * @brief       : Détecte si la balle entre en contact avec une bordure.
+     *      Si c'est un bord elle rebondie mais si c'est le bas change le status de la partie.
+     * @param ball  : Ball don on veut savoir la position (largeur)
+     */
     private void ballInBorder(Ball ball) {
         if (ball.getPosX() + Ball.SIZE == PREF_WIDTH || ball.getPosX() == 0) ball.setVecX(- ball.getVecX());
 
@@ -168,6 +192,13 @@ public class Breakout {
         }
     }
 
+    /**
+     * @brief       : Empèche un élément de dépasser les bord de l'axe des X
+     * @param posX  : int Position X de l'objet
+     * @param vectX : int de son vecteur de déplacement en X
+     * @param size  : int de sa taille
+     * @return      : int de sa nouvelle position
+     */
     private int noCrossX(int posX, int vectX, int size) {
         int x = posX + size + vectX;
 
@@ -182,6 +213,13 @@ public class Breakout {
         return vectX;
     }
 
+    /**
+     * @brief       : Empèche un élément de traverser les bords en l'axe des Y
+     * @param posY  : int de sa position sur l'axr des Y
+     * @param vectY : int de son vecteur de déplacemet en Y
+     * @param size  : int de la taille de l'élément (hauteur)
+     * @return      :
+     */
     private int noCrossY(int posY, int vectY, int size) {
         int y = posY + vectY + size;
 
@@ -196,24 +234,17 @@ public class Breakout {
         return vectY;
     }
 
+    /**
+     * @brief   : Détecte les colision entre la balle, la bar et les briques
+     */
     private void detectCollision() {
         Ball ball = player.getBall();
 
-        // TODO restore old implementation (probably commented lines)
-        // ## for testing purpose, the following code was changed...
-        //in order for the ganme to be very easy ;)
-        /*
+
         //detect bar collision
         if (ball.getHitbox().intersects(player.getHitbox())) {
             player.manageCollision();
-        } */
-        if(ball.getHitbox().y >= player.getHitbox().y){
-            player.manageCollision();
-        }
-
-
-
-        else {
+        } else {
             //detect brick collision
             for (AbstractBrick brick : bricks)
                 if (ball.getHitbox().intersects(brick.getHitbox())) {
@@ -225,28 +256,46 @@ public class Breakout {
         //detect bonus collision with the bottom of board
         Iterator<Bonus> it = bonuses.iterator();
         while(it.hasNext()){
-            //TODO modify this dummy implementation
             Bonus b = it.next();
+            if (b.getHitbox().intersects(player.getHitbox())) it.remove();
             if (b.getHitbox().y + b.getHitbox().height > PREF_HEIGHT - 56) it.remove();
         }
 
+
     }
 
+    /**
+     * @brief       : Ajoute un bonus
+     * @param bonus : Bonus à ajouter
+     */
     public void addBonus(Bonus bonus) {
         bonuses.add(bonus);
     }
 
+    /**
+     * @brief       : Retire un bonus
+     * @param bonus : Bonus à retirer
+     */
     public void removeBonus(Bonus bonus) {
         bonuses.remove(bonus);
     }
 
+    /**
+     * @brief       : Ajoute une brique
+     * @param brick : AbstractBrick à retirer
+     */
     public void addBrick(AbstractBrick brick) {
         bricks.add(brick);
     }
 
+    /**
+     * @brief       : Retire une brique
+     * @param brick : AbstractBrick à retirer
+     */
     public void removeBrick(AbstractBrick brick) {
         bricks.remove(brick);
     }
+
 
     public static void main(String... args) {
 
