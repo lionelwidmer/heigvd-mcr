@@ -20,8 +20,4 @@ public class Images {
             throw new Error(e);
         }
     }
-
-
-
-
 }
