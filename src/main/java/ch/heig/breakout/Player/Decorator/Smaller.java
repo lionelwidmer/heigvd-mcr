@@ -1,23 +1,22 @@
 package ch.heig.breakout.Player.Decorator;
 
 import ch.heig.breakout.Player.AbstractBar;
+import ch.heig.breakout.Player.PowerUp;
 
 import java.awt.*;
 
-public class Smaller extends AbstractBar {
+public class Smaller extends PowerUp {
+
+    public Smaller(AbstractBar bar) {
+        super(bar);
+    }
+
     public int getLength() {
-        return 0;
+        return barDecorated.getLength() - 30;
     }
 
-    public void draw(Graphics g) {
-        this.draw(g);
+    public int smallerCount(){
+        return barDecorated.smallerCount() + 1;
     }
 
-    public void move(int dist) {
-
-    }
-
-    public boolean scotch() {
-        return false;
-    }
 }

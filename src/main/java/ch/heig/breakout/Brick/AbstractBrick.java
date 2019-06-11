@@ -3,6 +3,7 @@ package ch.heig.breakout.Brick;
 import ch.heig.breakout.Bonus;
 import ch.heig.breakout.Breakout;
 import ch.heig.breakout.Player.Ball;
+import ch.heig.breakout.Player.Decorator.Bigger;
 
 import java.awt.*;
 
@@ -106,7 +107,20 @@ public abstract class AbstractBrick {
     protected void manageDamages(Ball ball) {
         board.removeBrick(this);
         //TODO put a real payload into the bonus (not a null ref)
-        if(Math.random() > 0.8) board.addBonus(new Bonus(posX, posY, null));
+
+        double rand = Math.random();
+
+        if( rand > 0.8) {
+            if( rand < 0.89) {
+                board.addBonus(new Bonus(posX, posY, Bonus.BIGGER));
+            }
+            else if( rand < 0.98) {
+                board.addBonus(new Bonus(posX, posY, Bonus.SMALLER));
+            }
+            else {
+                board.addBonus(new Bonus(posX, posY, Bonus.SCOTCH));
+            }
+        }
     }
 
     public abstract int getSideProtected();
