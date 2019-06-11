@@ -1,23 +1,20 @@
 package ch.heig.breakout.Player.Decorator;
 
 import ch.heig.breakout.Player.AbstractBar;
+import ch.heig.breakout.Player.PowerUp;
 
 import java.awt.*;
 
-public class Scotch extends AbstractBar {
-    public int getLength() {
-        return 0;
-    }
-
-    public void draw(Graphics g) {
-        this.draw(g);
-    }
-
-    public void move(int dist) {
-
+public class Scotch extends PowerUp {
+    public  Scotch(AbstractBar bar) {
+        super(bar);
     }
 
     public boolean scotch() {
-        return false;
+        return true;
+    }
+
+    public int scotchCount(){
+        return barDecorated.scotchCount() + 1;
     }
 }

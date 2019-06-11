@@ -1,6 +1,7 @@
 package ch.heig.breakout;
 
 import ch.heig.breakout.Player.*;
+import ch.heig.breakout.Player.Decorator.*;
 
 import java.awt.*;
 
@@ -8,7 +9,12 @@ import java.awt.*;
  * @brief   : Gère les bonus des bircks qui tombent
  */
 public class Bonus {
-    private PowerUp pwu;
+
+    public static final int BIGGER = 0;
+    public static final int SMALLER = 1;
+    public static final int SCOTCH = 2;
+
+    private final int pwuId;
     private int posX;
     private int posY;
     private Rectangle hitbox;
@@ -17,10 +23,10 @@ public class Bonus {
     final static int DOWNWARDSPEED = 5;
 
     //Constructeur
-    public Bonus(int x, int y, PowerUp powerUp) {
+    public Bonus(int x, int y, int powerUpId) {
         posX = x;
         posY = y;
-        this.pwu = powerUp;
+        this.pwuId = powerUpId;
         hitbox = new Rectangle(posX, posY, SIZE, SIZE);
     }
 
@@ -52,7 +58,7 @@ public class Bonus {
      * @brief   : Récupère le power up du bonus
      * @return  : PowerUp du bonus
      */
-    public PowerUp getPowerUp(){
-        return pwu;
+    public int getPowerUpId(){
+        return pwuId;
     }
 }

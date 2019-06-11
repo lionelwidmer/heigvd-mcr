@@ -14,7 +14,7 @@ public class Bar extends AbstractBar {
         posX = (x-getLength())/2;
         posY = y - MARGEIN;
         ball = new Ball(posX, posY-20);
-        hitbox= new Rectangle(x,y,getLength(),HEIGHT);
+        hitbox= new Rectangle(posX,posY,getLength(),HEIGHT);
     }
 
     /**
@@ -24,35 +24,5 @@ public class Bar extends AbstractBar {
     public int getLength() {
         return 140;
     }
-
-    /**
-     * @brief   : Dessine la bar
-     * @param g : Graphics g où elle doit être dessiné
-     */
-    public void draw(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fill3DRect(posX, posY, getLength(), HEIGHT, true);
-    }
-
-
-    /**
-     * @brief           : Déplace la bar
-     * @param moveBar   : int du déplacement
-     */
-    public void move(int moveBar) {
-        posX += moveBar;
-        hitbox.setLocation(posX,posY);
-    }
-
-    /**
-     * @brief   : Indique si la balle reste scotcher à la bar
-     * @return  : boolean indiquant si la balle est scotché
-     *          true    : si la balle est scotché
- *              false   : si la balle n'est pas scotché
-     */
-    public boolean scotch() {
-        return false;
-    }
-
 
 }

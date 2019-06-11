@@ -19,16 +19,36 @@ public abstract class AbstractBar {
     public AbstractBar(int x, int y) {
         this.posX = x;
         this.posY = y;
-        hitbox = new Rectangle(x, y, getLength(), HEIGHT);
     }
 
     public abstract int getLength();
 
-    public abstract void draw(Graphics g);
+    /**
+     * @brief   : Dessine la bar
+     * @param g : Graphics g où elle doit être dessiné
+     */
+    public void draw(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fill3DRect(getPosX(), getPosY(), getLength(), HEIGHT, true);
+    }
 
-    public abstract void move(int moveBar);
+    /**
+     * @brief           : Déplace la bar
+     * @param moveBar   : int du déplacement
+     */
+    public void move(int moveBar) {
+        posX += moveBar;
+    }
 
-    public abstract boolean scotch();
+    /**
+     * @brief   : Indique si la balle reste scotcher à la bar
+     * @return  : boolean indiquant si la balle est scotché
+     *          true    : si la balle est scotché
+     *              false   : si la balle n'est pas scotché
+     */
+    public boolean scotch() {
+        return false;
+    }
 
     public Ball getBall() {
         return ball;
@@ -38,8 +58,12 @@ public abstract class AbstractBar {
         return posX;
     }
 
+    public int getPosY() {
+        return posY;
+    }
+
     public Rectangle getHitbox() {
-        return hitbox;
+        return new Rectangle(getPosX(), getPosY(), getLength(), HEIGHT);
     }
 
     public void manageCollision() {
@@ -48,4 +72,11 @@ public abstract class AbstractBar {
 
             ball.setVecY(-ball.getVecY());
     }
+
+    public int biggerCount() { return 0;}
+    public int smallerCount() { return 0;}
+    public int scotchCount() { return 0;}
+
+
+    public boolean tryRemoveDecorator(PowerUp powerUp) { return false;}
 }

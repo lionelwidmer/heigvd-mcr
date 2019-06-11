@@ -7,6 +7,10 @@ import ch.heig.breakout.Brick.Decorator.SideProtect;
 import ch.heig.breakout.Player.AbstractBar;
 import ch.heig.breakout.Player.Ball;
 import ch.heig.breakout.Player.Bar;
+import ch.heig.breakout.Player.Decorator.Bigger;
+import ch.heig.breakout.Player.Decorator.Scotch;
+import ch.heig.breakout.Player.Decorator.Smaller;
+import ch.heig.breakout.Player.PowerUp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -268,6 +272,31 @@ public class Breakout {
         while(it.hasNext()){
             Bonus b = it.next();
             if (b.getHitbox().intersects(player.getHitbox())){
+                //TODO decorateur pas tout à fait opérationnel (probème)
+                int biggerCount = player.biggerCount();
+                switch( b.getPowerUpId()){
+                    case Bonus.BIGGER:
+                        if ( biggerCount < 3)
+                            player = new Bigger(player);
+                        break;
+                    case Bonus.SMALLER:
+                        if( biggerCount > 0) {
+                            //dans ce cas si tryRemoveDecorator échoue
+                            // c'est parce qu'il faut enlever le premier decorateur
+                            if ( !player.tryRemoveDecorator(new Bigger(player)))
+                                //cast possible ca il y a au moins 1 bigger
+                                player = ((PowerUp) player).getBarDecorated();
+                        }
+                        else if ( player.smallerCount() < 3)
+                            player = new Smaller(player);
+                        break;
+                    case Bonus.SCOTCH:
+                        if ( player.scotchCount() < 1)
+                        player = new Scotch(player);
+                        break;
+                    default:
+                        break;
+                }
                 it.remove();
             } else if (b.getHitbox().y + b.getHitbox().height > PREF_HEIGHT) {
                 it.remove();
