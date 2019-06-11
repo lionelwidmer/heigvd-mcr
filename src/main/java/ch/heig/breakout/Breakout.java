@@ -273,7 +273,7 @@ public class Breakout {
                         if( biggerCount > 0) {
                             //dans ce cas si tryRemoveDecorator échoue
                             // c'est parce qu'il faut enlever le premier decorateur
-                            if ( !player.tryRemoveDecorator(new Bigger(player)))
+                            if ( !player.tryRemovePowerUp(Bigger.class.getName()))
                                 //cast possible ca il y a au moins 1 bigger
                                 player = ((PowerUp) player).getBarDecorated();
                         }

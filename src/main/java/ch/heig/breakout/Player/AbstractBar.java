@@ -73,10 +73,30 @@ public abstract class AbstractBar {
             ball.setVecY(-ball.getVecY());
     }
 
+    /**
+     * @brief   : compte et retourne le nombre de décorateur Bigger
+     * @return  : int correspondant au nombre de décorateur Bigger
+     */
     public int biggerCount() { return 0;}
+
+    /**
+     * @brief   : compte et retourne le nombre de décorateur Smaller
+     * @return  : int correspondant au nombre de décorateur Smaller
+     */
     public int smallerCount() { return 0;}
+
+    /**
+     * @brief   : compte et retourne le nombre de décorateur Scotch
+     * @return  : int correspondant au nombre de décorateur Scotch
+     */
     public int scotchCount() { return 0;}
 
 
-    public boolean tryRemoveDecorator(PowerUp powerUp) { return false;}
+    /**
+     * @Brief   : tente de retirer un décorateur dont le nom de classe correspond au paramètre
+     *           (ne peut pas retirer le tout premier décorateur)
+     * @param   : powerUpClassName String correspondant au getName() d'un PowerUp
+     * @return  : vrai s'il a réussi à retirer le décorateur, faux sinon
+     */
+    public boolean tryRemovePowerUp(String powerUpClassName) { return false;}
 }
