@@ -3,6 +3,7 @@ package ch.heig.breakout;
 import ch.heig.breakout.Brick.AbstractBrick;
 import ch.heig.breakout.Brick.Brick;
 import ch.heig.breakout.Brick.Decorator.Shield;
+import ch.heig.breakout.Brick.Decorator.SideProtect;
 import ch.heig.breakout.Player.AbstractBar;
 import ch.heig.breakout.Player.Ball;
 import ch.heig.breakout.Player.Bar;
@@ -60,12 +61,17 @@ public class Breakout {
         final int nbrOfBrickRows = 8;
         final int nbrOfBrickColumns = 10;
 
-        for(int i = 0; i < nbrOfBrickRows; ++i){
+        for(int i = 0; i < nbrOfBrickRows - 1; ++i){
             for(int j = 0; j < nbrOfBrickColumns; ++j){
                 Brick b = new Brick(this, MARGEIN+j*AbstractBrick.getWIDTH(), MARGEIN+i*AbstractBrick.getHEIGHT());
                 if(i == j || i == nbrOfBrickColumns - 1 - j) bricks.add(new Shield(b));
                 else bricks.add(b);
             }
+        }
+        for(int j = 0; j < nbrOfBrickColumns; ++j){
+            Brick b = new Brick(this, MARGEIN+j*AbstractBrick.getWIDTH(),
+                    MARGEIN + (nbrOfBrickRows - 1) * AbstractBrick.getHEIGHT());
+            bricks.add(new SideProtect(b));
         }
 
         window.addKeyListener(new KeyAdapter() {
@@ -139,9 +145,7 @@ public class Breakout {
     }
 
     private void ballInBorder(Ball ball) {
-        if (ball.getPosX() + Ball.SIZE == PREF_WIDTH || ball.getPosX() == 0) {
-            ball.setVecX(-ball.getVecX());
-        }
+        if (ball.getPosX() + Ball.SIZE == PREF_WIDTH || ball.getPosX() == 0) ball.setVecX(- ball.getVecX());
 
         if (ball.getPosY() + Ball.SIZE == PREF_HEIGHT) {
             status = -1;
@@ -183,10 +187,18 @@ public class Breakout {
     private void detectCollision() {
         Ball ball = player.getBall();
 
+        // ## for testing purpose, the following code was changed...
+        //in order for the ganme to be very easy ;)
+        /*
         //detect bar collision
         if (ball.getHitbox().intersects(player.getHitbox())) {
             player.manageCollision();
+        } */
+        if(ball.getHitbox().y >= player.getHitbox().y){
+            player.manageCollision();
         }
+
+
         //detect brick collision
         else {
             for (AbstractBrick brick : bricks)

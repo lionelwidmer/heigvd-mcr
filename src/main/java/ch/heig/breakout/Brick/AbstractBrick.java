@@ -51,6 +51,9 @@ public abstract class AbstractBrick {
         else ball.setVecX(- ball.getVecX());
         */
 
+        System.out.println("Ball speed before " + ball.getVecX() + ", " +
+                ball.getVecY());
+
         switch (lastTouchedSide){
             case left: ball.setVecX(- ball.getVecX());
             break;
@@ -63,8 +66,12 @@ public abstract class AbstractBrick {
             default:
         }
 
+        System.out.println("Ball speed after " + ball.getVecX() + ", " +
+                ball.getVecY() + "\n");
+
     }
 
+    /*
 //Warning: don't call this method at any point in code (it makes assumptions that could be false sometimes)
     private void updateLastTouchedSide(Ball ball){
         Rectangle intersection = hitbox.intersection(ball.getHitbox());
@@ -73,6 +80,33 @@ public abstract class AbstractBrick {
         if(intersection.width * Math.abs(ball.getVecY()) < ball.getVecX() * Math.abs(intersection.height))
             lastTouchedSide = leftRightCandidate;
         else lastTouchedSide = topBottomCandidate;
+    }
+    */
+
+    private void updateLastTouchedSide(Ball ball){
+
+        Rectangle intersection = hitbox.intersection(ball.getHitbox());
+
+        Side leftRightCandidate = (intersection.x == posX) ? Side.left : Side.right;
+        Side topBottomCandidate = (intersection.y == posY) ? Side.top : Side.bottom;
+
+        switch(leftRightCandidate){
+            case left:
+                if(intersection.x + intersection.width - ball.getVecX() >= posX){
+                    lastTouchedSide = topBottomCandidate;
+                } else {
+                    lastTouchedSide = Side.left;
+                }
+                break;
+            case right:
+                if(intersection.x - ball.getVecX() <= posX + getWIDTH()){
+                    lastTouchedSide = topBottomCandidate;
+                } else {
+                    lastTouchedSide = Side.right;
+                }
+        }
+
+
     }
 
     protected void manageDamages(Ball ball) {

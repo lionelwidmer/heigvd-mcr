@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class SideProtect extends BrickDecorator {
 
-    SideProtect(AbstractBrick brick) {
+    public SideProtect(AbstractBrick brick) {
         super(brick);
     }
 
@@ -18,6 +18,7 @@ public class SideProtect extends BrickDecorator {
     }
 
     public void draw(Graphics g) {
+        decoratedBrick.draw(g);
     }
 
     public Bonus destroy() {
