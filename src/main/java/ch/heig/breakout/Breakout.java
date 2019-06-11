@@ -160,7 +160,6 @@ public class Breakout {
         } else {
             textFin.setText("Gagné !!");
         }
-
     }
 
     /**

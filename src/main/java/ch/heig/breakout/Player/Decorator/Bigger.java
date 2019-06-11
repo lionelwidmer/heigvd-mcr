@@ -3,8 +3,10 @@ package ch.heig.breakout.Player.Decorator;
 import ch.heig.breakout.Player.AbstractBar;
 import ch.heig.breakout.Player.PowerUp;
 
-import java.awt.*;
-
+/**
+ * @brief   : Décorateur scotch pour l'AbstractBrick, permet d'augmenter
+ * la taille de la bar
+ */
 public class Bigger extends PowerUp {
     public Bigger(AbstractBar bar) {
         super(bar);

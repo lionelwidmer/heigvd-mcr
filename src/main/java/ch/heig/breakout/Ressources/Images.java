@@ -6,6 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @brief   : Permet de gérer l'image pour le shield de la brique
+ */
 public class Images {
 
     public final static BufferedImage shield;

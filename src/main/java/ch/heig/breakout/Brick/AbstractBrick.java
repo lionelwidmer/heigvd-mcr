@@ -3,10 +3,13 @@ package ch.heig.breakout.Brick;
 import ch.heig.breakout.Bonus;
 import ch.heig.breakout.Breakout;
 import ch.heig.breakout.Player.Ball;
-import ch.heig.breakout.Player.Decorator.Bigger;
 
 import java.awt.*;
 
+/**
+ * @brief   : Classe abstraite AbstractBrick permettant de faire le lien entre
+ * les décorateurs de brick et brick
+ */
 public abstract class AbstractBrick {
     protected int posX;
     protected int posY;

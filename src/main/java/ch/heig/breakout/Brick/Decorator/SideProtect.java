@@ -4,11 +4,13 @@ import ch.heig.breakout.Brick.AbstractBrick;
 import ch.heig.breakout.Bonus;
 import ch.heig.breakout.Brick.BrickDecorator;
 import ch.heig.breakout.Player.Ball;
-import ch.heig.breakout.Ressources.Images;
-import javafx.scene.paint.LinearGradient;
 
 import java.awt.*;
 
+/**
+ * @brief   : Décorateur de brick protégeant un de ses côtés
+ * (impossible à détruire de ce côté)
+ */
 public class SideProtect extends BrickDecorator {
 
     public SideProtect(AbstractBrick brick) {

@@ -1,8 +1,5 @@
 package ch.heig.breakout;
 
-import ch.heig.breakout.Player.*;
-import ch.heig.breakout.Player.Decorator.*;
-
 import java.awt.*;
 
 /**

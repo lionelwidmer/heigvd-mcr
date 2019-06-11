@@ -2,10 +2,13 @@ package ch.heig.breakout.Brick;
 
 import ch.heig.breakout.Bonus;
 import ch.heig.breakout.Breakout;
-import ch.heig.breakout.Player.Ball;
 
 import java.awt.*;
 
+/**
+ * @brief   : Classe brick héritant de AbstractBrick permettant de gérer
+ * les briques
+ */
 public class Brick extends AbstractBrick {
 
     public Brick(Breakout board, int x, int y){
