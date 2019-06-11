@@ -2,18 +2,37 @@ package ch.heig.breakout;
 
 import ch.heig.breakout.Player.*;
 
+import java.awt.*;
+
 public class Bonus {
-    PowerUp pwu;
-    double posX;
-    double posY;
+    private PowerUp pwu;
+    private int posX;
+    private int posY;
+    private Rectangle hitbox;
 
-    Bonus(PowerUp power) {
-        this.pwu = power;
+    final static int SIZE = 20;
+    final static int DOWNWARDSPEED = 5;
+
+    public Bonus(int x, int y, PowerUp powerUp) {
+        posX = x;
+        posY = y;
+        this.pwu = powerUp;
+        hitbox = new Rectangle(posX, posY, SIZE, SIZE);
     }
 
-    void move() {
+    public void move() {
+        posY += DOWNWARDSPEED;
     }
 
-    void draw() {
+    public void draw(Graphics g) {
+        g.drawOval(posX, posY, SIZE, SIZE);
+    }
+
+    public Rectangle getHitbox(){
+        return hitbox;
+    }
+
+    public PowerUp getPowerUp(){
+        return pwu;
     }
 }

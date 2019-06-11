@@ -42,6 +42,9 @@ public class Breakout {
             for (AbstractBrick b : bricks) {
                 b.draw(g);
             }
+            for(Bonus b: bonuses){
+                b.draw(g);
+            }
             player.draw(g);
             player.getBall().draw(g);
         }
@@ -148,6 +151,8 @@ public class Breakout {
             player.getBall().grip(moveBarX);
         }
 
+        //move bonuses
+        for(Bonus b: bonuses) b.move();
 
     }
 
@@ -194,6 +199,7 @@ public class Breakout {
     private void detectCollision() {
         Ball ball = player.getBall();
 
+        // TODO restore old implementation (probably commented lines)
         // ## for testing purpose, the following code was changed...
         //in order for the ganme to be very easy ;)
         /*
@@ -206,13 +212,22 @@ public class Breakout {
         }
 
 
-        //detect brick collision
+
         else {
+            //detect brick collision
             for (AbstractBrick brick : bricks)
                 if (ball.getHitbox().intersects(brick.getHitbox())) {
                     brick.manageCollision(player.getBall());
                     break;
                 }
+        }
+
+        //detect bonus collision with the bottom of board
+        Iterator<Bonus> it = bonuses.iterator();
+        while(it.hasNext()){
+            //TODO modify this dummy implementation
+            Bonus b = it.next();
+            if (b.getHitbox().y + b.getHitbox().height > PREF_HEIGHT - 56) it.remove();
         }
 
     }

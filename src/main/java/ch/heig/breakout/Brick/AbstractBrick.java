@@ -105,7 +105,8 @@ public abstract class AbstractBrick {
 
     protected void manageDamages(Ball ball) {
         board.removeBrick(this);
-        //TODO decide if bonus is released and release or not accordingly
+        //TODO put a real payload into the bonus (not a null ref)
+        if(Math.random() > 0.2) board.addBonus(new Bonus(posX, posY, null));
     }
 
     public abstract int getSideProtected();
