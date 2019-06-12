@@ -46,19 +46,17 @@ public abstract class PowerUp extends AbstractBar {
     public int scotchCount() { return barDecorated.scotchCount();}
 
     public boolean tryRemovePowerUp( String powerUpClassName) {
-        boolean isRemoved = false;
-
         if( this.getClass().getName() != powerUpClassName) {
             for (PowerUp nextBar = this; nextBar.getClass().getName() != Bar.class.getName(); nextBar = (PowerUp)nextBar.barDecorated) {
                 if (nextBar.barDecorated.getClass().getName() == powerUpClassName) {
                     nextBar.barDecorated = ((PowerUp)nextBar.barDecorated).barDecorated;
-                    isRemoved = true;
+                    return true;
                 }
             }
         }
 
-        //cas pas trouvé return
-        return isRemoved;
+        //cas pas trouvé ou premier
+        return false;
     }
 
     public AbstractBar getBarDecorated() {
