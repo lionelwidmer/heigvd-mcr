@@ -40,7 +40,20 @@ public class Bonus {
      * @param g : Graphics où est dessiner le donus
      */
     public void draw(Graphics g) {
-        g.setColor(Color.red);
+        switch(pwuId){
+            case BIGGER:
+                g.setColor(Color.red);
+                break;
+            case SMALLER:
+                g.setColor(Color.green);
+                break;
+            case SCOTCH:
+                g.setColor(Color.blue);
+                break;
+            default:
+                g.setColor(Color.gray);
+                break;
+        }
         g.drawOval(posX, posY, SIZE, SIZE);
     }
 
