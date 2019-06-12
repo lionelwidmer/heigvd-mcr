@@ -94,7 +94,7 @@ public abstract class AbstractBrick {
             if( rand < 0.81) {
                 board.addBonus(new Bonus(posX, posY, Bonus.BIGGER));
             }
-            else if( rand < 0.82) {
+            else if( rand < 0.99) {
                 board.addBonus(new Bonus(posX, posY, Bonus.SMALLER));
             }
             else {

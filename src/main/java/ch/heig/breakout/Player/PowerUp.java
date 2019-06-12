@@ -37,8 +37,8 @@ public abstract class PowerUp extends AbstractBar {
         return barDecorated.getPosY();
     }
 
-    public void manageCollision() {
-        barDecorated.manageCollision();
+    public void manageCollision(int length) {
+        barDecorated.manageCollision(length);
     }
 
     public int biggerCount() { return barDecorated.biggerCount();}
