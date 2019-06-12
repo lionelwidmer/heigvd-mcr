@@ -64,6 +64,10 @@ public class Ball {
         return vecY;
     }
 
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
     public void setVecX(int vecX) {
         this.vecX = vecX;
     }

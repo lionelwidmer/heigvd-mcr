@@ -37,7 +37,7 @@ public abstract class AbstractBrick {
     }
 
     public void manageCollision(Ball ball) {
-        //Warning: don't call the following method at any point in code
+
         updateLastTouchedSide(ball);
 
         manageBouncing(ball);
@@ -45,14 +45,6 @@ public abstract class AbstractBrick {
     }
 
     protected void manageBouncing(Ball ball) {
-        /*
-        //if the ball horizontal speed is bigger than its vertical speed,
-        //then it means it touched the vertical borders of the brick first;
-        //so in this case we make it bounce horizontally
-        if(Math.abs(ball.getVecY()) > Math.abs(ball.getVecX())) ball.setVecY(- ball.getVecY());
-        //otherwise, we make it bounce vertically
-        else ball.setVecX(- ball.getVecX());
-        */
 
         switch (lastTouchedSide){
             case left: ball.setVecX(- ball.getVecX());
@@ -68,18 +60,6 @@ public abstract class AbstractBrick {
 
 
     }
-
-    /*
-//Warning: don't call this method at any point in code (it makes assumptions that could be false sometimes)
-    private void updateLastTouchedSide(Ball ball){
-        Rectangle intersection = hitbox.intersection(ball.getHitbox());
-        Side leftRightCandidate = (intersection.x == posX) ? Side.left : Side.right;
-        Side topBottomCandidate = (intersection.y == posY) ? Side.top : Side.bottom;
-        if(intersection.width * Math.abs(ball.getVecY()) < ball.getVecX() * Math.abs(intersection.height))
-            lastTouchedSide = leftRightCandidate;
-        else lastTouchedSide = topBottomCandidate;
-    }
-    */
 
     private void updateLastTouchedSide(Ball ball){
 
@@ -107,15 +87,14 @@ public abstract class AbstractBrick {
 
     protected void manageDamages(Ball ball) {
         board.removeBrick(this);
-        //TODO put a real payload into the bonus (not a null ref)
 
         double rand = Math.random();
 
         if( rand > 0.8) {
-            if( rand < 0.88) {
+            if( rand < 0.81) {
                 board.addBonus(new Bonus(posX, posY, Bonus.BIGGER));
             }
-            else if( rand < 0.96) {
+            else if( rand < 0.82) {
                 board.addBonus(new Bonus(posX, posY, Bonus.SMALLER));
             }
             else {

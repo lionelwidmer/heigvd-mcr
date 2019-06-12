@@ -105,6 +105,7 @@ public class Breakout {
                         break;
                     case KeyEvent.VK_SPACE:
                         launch = true;
+                        isGrip = false;
                         isStart = false;
                         break;
                 }
@@ -256,8 +257,12 @@ public class Breakout {
 
         //detect bar collision
         if (ball.getHitbox().intersects(player.getHitbox())) {
+
+            if(!isGrip) {
+                player.manageCollision();
+                ball.setPosY(player.getPosY() - Ball.SIZE - 2);
+            }
             isGrip = player.scotch();
-            player.manageCollision();
         } else {
             //detect brick collision
             for (AbstractBrick brick : bricks)

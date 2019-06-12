@@ -1,5 +1,7 @@
 package ch.heig.breakout.Player;
 
+import ch.heig.breakout.Breakout;
+
 import java.awt.*;
 
 /**
@@ -70,7 +72,6 @@ public abstract class AbstractBar {
      * @brief   : Gère la colision de la balle et de la bar
      */
     public void manageCollision() {
-
         int diff = ball.getPosX() - (getPosX()+getLength()/2);
         ball.setVecX(diff / 10);
         ball.setVecY(-ball.getVecY());
