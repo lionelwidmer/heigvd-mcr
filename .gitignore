@@ -122,3 +122,6 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 # End of https://www.gitignore.io/api/java,maven,intellij
+
+# Following lines added by Lionel Widmer on 12.06.2019
+.idea

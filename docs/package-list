@@ -1,0 +1,6 @@
+ch.heig.breakout
+ch.heig.breakout.Brick
+ch.heig.breakout.Brick.Decorator
+ch.heig.breakout.Player
+ch.heig.breakout.Player.Decorator
+ch.heig.breakout.Ressources
