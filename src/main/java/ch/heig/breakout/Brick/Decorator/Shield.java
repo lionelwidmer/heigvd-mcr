@@ -24,18 +24,10 @@ public class Shield extends BrickDecorator {
         board.removeBrick(this);
     }
 
-    public int getSideProtected() {
-        return 0;
-    }
-
     public void draw(Graphics g) {
         decoratedBrick.draw(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(Images.shield, decoratedBrick.getPosX(), decoratedBrick.getPosY(), null);
-    }
-
-    public Bonus destroy() {
-        return null;
     }
 
     public Rectangle getHitbox() {
