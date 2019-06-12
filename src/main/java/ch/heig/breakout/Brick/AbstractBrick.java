@@ -36,14 +36,22 @@ public abstract class AbstractBrick {
         hitbox = new Rectangle(posX, posY, WIDTH, HEIGHT);
     }
 
+    /**
+     * @brief       : Gère la colision entre la brique et la balle
+     * @param ball  : Ball entrant en colision avec la brique
+     */
     public void manageCollision(Ball ball) {
 
         updateLastTouchedSide(ball);
 
         manageBouncing(ball);
-        manageDamages(ball);
+        manageDamages();
     }
 
+    /**
+     * @brief       : Gère le rebond de la balle
+     * @param ball  : Balle qui doit rebondire
+     */
     protected void manageBouncing(Ball ball) {
 
         switch (lastTouchedSide){
@@ -61,6 +69,10 @@ public abstract class AbstractBrick {
 
     }
 
+    /**
+     * @brief       : Test le contact avec la balle
+     * @param ball  : Ball entrant en contact avec la brique
+     */
     private void updateLastTouchedSide(Ball ball){
 
         Rectangle intersection = hitbox.intersection(ball.getHitbox());
@@ -85,7 +97,10 @@ public abstract class AbstractBrick {
         }
     }
 
-    protected void manageDamages(Ball ball) {
+    /**
+     * @brief       : Gère la destruction de la brique et le laché de bonus
+     */
+    protected void manageDamages() {
         board.removeBrick(this);
 
         double rand = Math.random();
@@ -103,6 +118,10 @@ public abstract class AbstractBrick {
         }
     }
 
+    /**
+     * @brief   : dessine la brique
+     * @param g : graphique ou est dessiné la brique
+     */
     public abstract void draw(Graphics g);
 
     public abstract Rectangle getHitbox();
