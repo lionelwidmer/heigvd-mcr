@@ -19,7 +19,7 @@ public class Shield extends BrickDecorator {
     }
 
     @Override
-    protected void manageDamages(Ball ball){
+    protected void manageDamages(){
         board.addBrick(decoratedBrick);
         board.removeBrick(this);
     }

@@ -259,7 +259,7 @@ public class Breakout {
         if (ball.getHitbox().intersects(player.getHitbox())) {
 
             if(!isGrip) {
-                player.manageCollision();
+                player.manageCollision(player.getLength());
                 ball.setPosY(player.getPosY() - Ball.SIZE - 2);
             }
             isGrip = player.scotch();
@@ -277,7 +277,6 @@ public class Breakout {
         while(it.hasNext()){
             Bonus b = it.next();
             if (b.getHitbox().intersects(player.getHitbox())){
-                //TODO decorateur pas tout à fait opérationnel (probème)
                 int biggerCount = player.biggerCount();
                 int smallerCount = player.smallerCount();
                 switch( b.getPowerUpId()){

@@ -17,10 +17,6 @@ public class SideProtect extends BrickDecorator {
         super(brick);
     }
 
-    public int getSideProtected() {
-        return 0;
-    }
-
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         //g2.setPaint(Images.rays);
@@ -28,12 +24,8 @@ public class SideProtect extends BrickDecorator {
         g2.fill3DRect(posX, posY, WIDTH, HEIGHT, true);
     }
 
-    public Bonus destroy() {
-        return null;
-    }
-
     @Override
-    protected void manageDamages(Ball ball){
+    protected void manageDamages(){
         if(lastTouchedSide == Side.top || lastTouchedSide == Side.bottom) board.removeBrick(this);
     }
 
