@@ -17,8 +17,8 @@ public class Images {
 
     static {
         try {
-            shield = ImageIO.read(new File("shield.png"));
-            rays = new TexturePaint(ImageIO.read((new File("shield.png"))), new Rectangle(0, 0, 80, 30));
+            shield = ImageIO.read(new File("src/main/java/ressources/shield.png"));
+            rays = new TexturePaint(ImageIO.read((new File("src/main/java/ressources/shield.png"))), new Rectangle(0, 0, 80, 30));
         } catch (IOException e) {
             throw new Error(e);
         }
