@@ -80,21 +80,13 @@ public abstract class AbstractBrick {
         Side leftRightCandidate = (intersection.x == posX) ? Side.left : Side.right;
         Side topBottomCandidate = (intersection.y == posY) ? Side.top : Side.bottom;
 
-        switch(leftRightCandidate){
-            case left:
-                if(intersection.x + intersection.width - ball.getVecX() >= posX){
-                    lastTouchedSide = topBottomCandidate;
-                } else {
-                    lastTouchedSide = Side.left;
-                }
-                break;
-            case right:
-                if(intersection.x - ball.getVecX() <= posX + getWIDTH()){
-                    lastTouchedSide = topBottomCandidate;
-                } else {
-                    lastTouchedSide = Side.right;
-                }
-        }
+        //if the vertical bar x coordinate was crossed after the horizontal y coordinate
+        if(Math.abs(ball.getVecY()) * intersection.width < Math.abs(ball.getVecX()) * intersection.height)
+            //the touched side is a vertical side
+            lastTouchedSide = leftRightCandidate;
+        //otherwise a horizontal one
+        else lastTouchedSide = topBottomCandidate;
+
     }
 
     /**
