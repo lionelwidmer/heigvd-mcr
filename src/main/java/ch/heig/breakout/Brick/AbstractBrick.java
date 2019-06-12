@@ -124,11 +124,7 @@ public abstract class AbstractBrick {
         }
     }
 
-    public abstract int getSideProtected();
-
     public abstract void draw(Graphics g);
-
-    public abstract Bonus destroy();
 
     public abstract Rectangle getHitbox();
 
