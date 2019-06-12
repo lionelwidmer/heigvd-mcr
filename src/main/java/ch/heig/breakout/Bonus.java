@@ -16,8 +16,8 @@ public class Bonus {
     private int posY;
     private Rectangle hitbox;
 
-    final static int SIZE = 20;
-    final static int DOWNWARDSPEED = 5;
+    private final static int SIZE = 20;
+    private final static int DOWNWARDSPEED = 5;
 
     //Constructeur
     public Bonus(int x, int y, int powerUpId) {

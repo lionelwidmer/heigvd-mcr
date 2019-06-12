@@ -11,7 +11,7 @@ public abstract class AbstractBar {
     protected int posY;
     protected int posX;
     protected Rectangle hitbox;
-    Ball ball;
+    protected Ball ball;
 
     protected AbstractBar() {
     }
