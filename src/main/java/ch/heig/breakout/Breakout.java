@@ -174,13 +174,13 @@ public class Breakout {
 
         //Ball
         detectCollision();
-        if (launch && !isGrip && !isStart) {
+        if (launch && !isGrip) {
             int moveX = noCrossX(player.getBall().getPosX(), player.getBall().getVecX(), Ball.SIZE);
             int moveY = noCrossY(player.getBall().getPosY(), player.getBall().getVecY(), Ball.SIZE);
             player.getBall().move(moveX, moveY);
             ballInBorder(player.getBall());
         }
-        else if(isGrip || isStart){
+        else {
             player.getBall().grip(moveBarX);
         }
 
@@ -257,7 +257,6 @@ public class Breakout {
         //detect bar collision
         if (ball.getHitbox().intersects(player.getHitbox())) {
             isGrip = player.scotch();
-            launch = false;
             player.manageCollision();
         } else {
             //detect brick collision
