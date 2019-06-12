@@ -278,16 +278,25 @@ public class Breakout {
             Bonus b = it.next();
             if (b.getHitbox().intersects(player.getHitbox())){
                 int biggerCount = player.biggerCount();
+                int smallerCount = player.smallerCount();
                 switch( b.getPowerUpId()){
                     case Bonus.BIGGER:
-                        if ( biggerCount < 3)
+                        if( smallerCount > 0) {
+                            //dans ce cas si tryRemoveDecorator échoue
+                            // c'est parce qu'il faut enlever le premier décorateur
+                            if ( !player.tryRemovePowerUp( Smaller.class.getName()))
+                                //cast possible ca il y a au moins 1 smaller
+                                player = ((PowerUp) player).getBarDecorated();
+                        }
+                        else if ( biggerCount < 3)
                             player = new Bigger(player);
+
                         break;
                     case Bonus.SMALLER:
                         if( biggerCount > 0) {
                             //dans ce cas si tryRemoveDecorator échoue
                             // c'est parce qu'il faut enlever le premier decorateur
-                            if ( !player.tryRemovePowerUp(Bigger.class.getName()))
+                            if ( !player.tryRemovePowerUp( Bigger.class.getName()))
                                 //cast possible ca il y a au moins 1 bigger
                                 player = ((PowerUp) player).getBarDecorated();
                         }
