@@ -152,6 +152,7 @@ public class Breakout {
             computeMove();
             window.repaint();
             timeout = Math.max(0, timeout + (1000/FPS) - (System.currentTimeMillis() - timestamp));
+
             if(bricks.isEmpty()){
                 status = 1;
             }
@@ -174,8 +175,9 @@ public class Breakout {
             player.move(moveBarX);
 
         //Ball
-        detectCollision();
+        detectCollisionBonus();
         if (launch && !isGrip) {
+            detectCollision();
             int moveX = noCrossX(player.getBall().getPosX(), player.getBall().getVecX(), Ball.SIZE);
             int moveY = noCrossY(player.getBall().getPosY(), player.getBall().getVecY(), Ball.SIZE);
             player.getBall().move(moveX, moveY);
@@ -258,11 +260,12 @@ public class Breakout {
         //detect bar collision
         if (ball.getHitbox().intersects(player.getHitbox())) {
 
-            if(!isGrip) {
-                player.manageCollision(player.getLength());
-                ball.setPosY(player.getPosY() - Ball.SIZE - 2);
-            }
+            player.manageCollision(player.getLength());
+
             isGrip = player.scotch();
+            if(isGrip){
+                player.getBall().setPosY(player.getPosY() - Ball.SIZE - ball.getVecY());
+            }
         } else {
             //detect brick collision
             for (AbstractBrick brick : bricks)
@@ -272,6 +275,10 @@ public class Breakout {
                 }
         }
 
+
+    }
+
+    private void detectCollisionBonus() {
         //detect bonus collision with the bottom of board or bar
         Iterator<Bonus> it = bonuses.iterator();
         while(it.hasNext()){
@@ -315,6 +322,7 @@ public class Breakout {
                 it.remove();
             }
         }
+
     }
 
     /**
